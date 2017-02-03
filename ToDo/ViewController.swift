@@ -88,10 +88,10 @@ extension ViewController {
         theController?.actions.last?.isEnabled = theLength >= self.MIN_TITLE_LENGTH
     }
     
-    func phoneFieldDidChance(textField:UITextField) {
-        
-        
-        
+    func phoneFieldDidChange(textField:UITextField) {
+        let theLength = textField.text!.characters.count
+        let theController = self.presentedViewController as? UIAlertController
+
         theController?.actions.last?.isEnabled = theLength >= self.MIN_TITLE_LENGTH
     }
     func validPhone(textField:UITextField){

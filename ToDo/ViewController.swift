@@ -56,7 +56,7 @@ extension ViewController {
         quickAddAlert.addAction(cancelAction)
         
         quickAddAlert.addTextField(configurationHandler: nil)
-        
+        quickAddAlert.addTextField(configurationHandler: nil)
         let addAction = UIAlertAction(title: "Add", style: .default, handler: {(_) in
             guard let theTextField = quickAddAlert.textFields?.first, let theTitle = theTextField.text
             else {
@@ -70,6 +70,8 @@ extension ViewController {
         quickAddAlert.addAction(addAction)
         
         quickAddAlert.textFields?.first?.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: .editingChanged)
+        quickAddAlert.textFields?.last?.addTarget(self, action: #selector(phoneFieldDidChange(textField:)), for: .editingChanged)
+        
         
         present(quickAddAlert, animated: true, completion: nil)
     }
@@ -84,6 +86,20 @@ extension ViewController {
         let theLength = textField.text!.characters.count
         let theController = self.presentedViewController as? UIAlertController
         theController?.actions.last?.isEnabled = theLength >= self.MIN_TITLE_LENGTH
+    }
+    
+    func phoneFieldDidChance(textField:UITextField) {
+        
+        
+        
+        theController?.actions.last?.isEnabled = theLength >= self.MIN_TITLE_LENGTH
+    }
+    func validPhone(textField:UITextField){
+        
+        if textField =~ "(?\\d{3})?\\s\\d{3}-\\d{4}" {
+            return true
+        }
+        return false
     }
 }
 

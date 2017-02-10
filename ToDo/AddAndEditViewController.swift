@@ -10,6 +10,12 @@ import UIKit
 
 class AddAndEditViewController: UIViewController {
 
+    @IBOutlet weak var theName: UITextField!
+    @IBOutlet weak var thePhone: UITextField!
+    @IBOutlet weak var type: UISegmentedControl!
+    @IBOutlet weak var theAddress: UITextView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,6 +40,8 @@ class AddAndEditViewController: UIViewController {
 
     @IBAction func doCancel(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
+    }
+    @IBAction func Add(_ sender: UIButton) {
     }
 }
 

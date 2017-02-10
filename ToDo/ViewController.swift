@@ -10,13 +10,17 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var theToDoList = [ToDo]() {
+    var contactList = [Contact]() {
         didSet {
             self.tableView.reloadData()
         }
     }
     @IBOutlet weak var tableView: UITableView!
-    let MIN_TITLE_LENGTH = 3
+    let MIN_NAME_LENGTH = 4
+    let MIN_PHONE_LENGTH = 7
+    var correct_name = false
+    var correct_phone = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,13 +39,13 @@ extension ViewController {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.theToDoList.count
+        return self.contactList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let theCell = self.tableView.dequeueReusableCell(withIdentifier: "TheCell", for: indexPath)
-        theCell.textLabel?.text = self.theToDoList[indexPath.row].theTitle
-        theCell.detailTextLabel?.text = self.theToDoList[indexPath.row].dateCreatedAsString
+        theCell.textLabel?.text = self.contactList[indexPath.row].Name
+        theCell.detailTextLabel?.text = self.contactList[indexPath.row].Phone
         return theCell
     }
 }
@@ -49,66 +53,61 @@ extension ViewController {
 // Button Actions
 extension ViewController {
     
-    @IBAction func doQuickAdd(_ sender: UIBarButtonItem) {
-        let quickAddAlert = UIAlertController(title: "Name and Phone", message: "Please enter Name and Phone Number", preferredStyle: .alert)
+    @IBAction func doAdd(_ sender: UIBarButtonItem) {
+        let AddAlert = UIAlertController(title: "Add Contact", message: "Enter Name and Phone", preferredStyle: .alert)
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        quickAddAlert.addAction(cancelAction)
+        AddAlert.addAction(cancelAction)
         
-        quickAddAlert.addTextField(configurationHandler: nil)
-        quickAddAlert.addTextField(configurationHandler: nil)
+        AddAlert.addTextField(configurationHandler: nil)
+        AddAlert.addTextField(configurationHandler: nil)
+        
         let addAction = UIAlertAction(title: "Add", style: .default, handler: {(_) in
-            guard let theTextField = quickAddAlert.textFields?.first, let theTitle = theTextField.text
-            else {
-                return
+            guard let theNameField = AddAlert.textFields?.first,
+                let thename = theNameField.text
+                else {
+                    return
+            }
+            guard let thePhoneField = AddAlert.textFields?.last,
+                let thephone = thePhoneField.text
+                else{
+                    return
             }
             // If we make it here, we have a valid title!!! Therefore let's add it!
-            self.theToDoList.append(ToDo(theTitle: theTitle))
+            self.contactList.append(Contact(theName: thename , thePhone: thephone))
         })
         
         addAction.isEnabled = false
-        quickAddAlert.addAction(addAction)
+        AddAlert.addAction(addAction)
         
-        quickAddAlert.textFields?.first?.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: .editingChanged)
-        quickAddAlert.textFields?.last?.addTarget(self, action: #selector(phoneFieldDidChange(textField:)), for: .editingChanged)
+        AddAlert.textFields?.first?.addTarget(self, action: #selector(nameFieldDidChange(textField:)), for: .editingChanged)
+        AddAlert.textFields?.last?.addTarget(self, action: #selector(phoneFieldDidChange(textField:)), for: .editingChanged)
         
         
-        present(quickAddAlert, animated: true, completion: nil)
-    }
-    
-    @IBAction func doAdd(_ sender: UIBarButtonItem) {
+        present(AddAlert, animated: true, completion: nil)
+        
+   
     }
 }
 
 // Event Handlers
 extension ViewController {
-    func textFieldDidChange(textField:UITextField) {
-        let theLength = textField.text!.characters.count
+    func nameFieldDidChange(textField:UITextField) {
+        correct_name =  textField.text!.characters.count >= MIN_NAME_LENGTH
         let theController = self.presentedViewController as? UIAlertController
-        theController?.actions.last?.isEnabled = theLength >= self.MIN_TITLE_LENGTH
+        theController?.actions.last?.isEnabled = correct_name && correct_phone
     }
-    
     func phoneFieldDidChange(textField:UITextField) {
-        let theLength = textField.text!.characters.count
+        correct_phone =  textField.text!.characters.count >= MIN_PHONE_LENGTH
         let theController = self.presentedViewController as? UIAlertController
-
-        theController?.actions.last?.isEnabled = theLength >= self.MIN_TITLE_LENGTH
+        theController?.actions.last?.isEnabled = correct_name && correct_phone
     }
-    func validPhone(textField:UITextField){
-        
-        if textField =~ "(?\\d{3})?\\s\\d{3}-\\d{4}" {
-            return true
-        }
-        return false
-    }
-}
-
 // Delegate Methods
-
+}
 extension ViewController {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            self.theToDoList.remove(at: indexPath.row)
+            self.contactList.remove(at: indexPath.row)
         }
     }
 }

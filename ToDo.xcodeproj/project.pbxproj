@@ -16,6 +16,8 @@
 		830B64591E364ECB00DEEDD0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 830B64581E364ECB00DEEDD0 /* Assets.xcassets */; };
 		830B645C1E364ECB00DEEDD0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 830B645A1E364ECB00DEEDD0 /* LaunchScreen.storyboard */; };
 		830B64671E364ECB00DEEDD0 /* ToDoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830B64661E364ECB00DEEDD0 /* ToDoUITests.swift */; };
+		CB00E9EE1E4E11E600956265 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB00E9ED1E4E11E600956265 /* Contact.swift */; };
+		CB00E9F01E4E121A00956265 /* PhoneType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB00E9EF1E4E121A00956265 /* PhoneType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +44,8 @@
 		830B64621E364ECB00DEEDD0 /* ToDoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		830B64661E364ECB00DEEDD0 /* ToDoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoUITests.swift; sourceTree = "<group>"; };
 		830B64681E364ECB00DEEDD0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CB00E9ED1E4E11E600956265 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		CB00E9EF1E4E121A00956265 /* PhoneType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +69,8 @@
 		3FD497A01E3A944D001EA33D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CB00E9ED1E4E11E600956265 /* Contact.swift */,
+				CB00E9EF1E4E121A00956265 /* PhoneType.swift */,
 				3FD497A31E3A94FB001EA33D /* Priority.swift */,
 				3FD497A51E3A96EF001EA33D /* ToDo.swift */,
 			);
@@ -240,7 +246,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB00E9EE1E4E11E600956265 /* Contact.swift in Sources */,
 				830B64541E364ECB00DEEDD0 /* ViewController.swift in Sources */,
+				CB00E9F01E4E121A00956265 /* PhoneType.swift in Sources */,
 				3FD497A81E3AA2EA001EA33D /* AddAndEditViewController.swift in Sources */,
 				830B64521E364ECB00DEEDD0 /* AppDelegate.swift in Sources */,
 				3FD497A41E3A94FB001EA33D /* Priority.swift in Sources */,
